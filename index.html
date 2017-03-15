@@ -4,21 +4,43 @@
 	 <meta charset="UTF-8">
 	<title>Weather App</title>
 	<link rel="stylesheet" type="text/css" href="styles.css">
-	<script type="text/javascript" src="app.js"></script>
+	<!--<script type="text/javascript" src="app.js"></script>-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
 
 	<div class="weather-app">
 		<div class="temperature"><span id="temperature">0 </span>&deg; Fahrenheit</div>
 		<div class="location"><span id="location">Location</span></div>
-
-<BR>
-		<form>
-<input>Zip Code</input> <BR>
-<button onclick="test()">Submit</button>
-		</form>
-
+		<BR>
+			<form>
+				<input id="zipCode">Zip Code</input> <BR>
+					<button id="submit">Submit</button>
+			</form>
 	</div>
 
+<script>
+$(document).ready(function(){
+
+function doStuff(){
+	var temp;
+	var loc;
+	var api="http://api.openweathermap.org/data/2.5/weather?zip=75067&APPID=4409cc84190b23cb86522e4265e9c1bf"
+
+ $.getJSON(api, function(data){
+	temp = data.main.temp;
+	loc = data.name;
+ $('#temperature').html(temp);
+ $('#location').html(loc);
+			});
+};
+
+
+$('#submit').click(function(){
+doStuff();
+});
+
+});
+</script>
 </body>
 </html>
