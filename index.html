@@ -3,42 +3,62 @@
 <head>
 	 <meta charset="UTF-8">
 	<title>Weather App</title>
-	<link rel="stylesheet" type="text/css" href="styles.css">
+	<!--<link rel="stylesheet" type="text/css" href="styles.css">-->
 	<!--<script type="text/javascript" src="app.js"></script>-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<style>
+body {
+	background-color: lightblue;
+	display: block;
+}
+
+#mainContainer {
+	display: block;
+	top: 100px;
+}
+
+</style>
 </head>
 <body>
 
-	<div class="weather-app">
+	<div id=mainContainer class="weather-app text-center">
 		<div class="temperature"><span id="temperature">0 </span>&deg; Fahrenheit</div>
 		<div class="location"><span id="location">Location</span></div>
-		<BR>
+			<BR>
 			<form>
 				<input id="zipCode">Zip Code</input> <BR>
-					<button id="submit">Submit</button>
+					<input type="button" id="submit" value="Submit"></input>
 			</form>
 	</div>
 
-<script>
+<script type=text/javascript>
 $(document).ready(function(){
+var zipCode;
+var appIdNum = "4409cc84190b23cb86522e4265e9c1bf"
+var url;
+var temperature;
+var location;
+var temperatureForReal;
 
-function doStuff(){
-	var temp;
-	var loc;
-	var api="http://api.openweathermap.org/data/2.5/weather?zip=75067&APPID=4409cc84190b23cb86522e4265e9c1bf"
+	$('#submit').click(function(){
+		zipCode = $('#zipCode').val();
+	 	url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipCode + "&APPID="+ appIdNum;
 
- $.getJSON(api, function(data){
-	temp = data.main.temp;
-	loc = data.name;
- $('#temperature').html(temp);
- $('#location').html(loc);
+			$.getJSON(url, function(weather){
+				location = weather.name;
+				temperature = weather.main.temp - 273;
+				temperatureForReal = (9/5) * temperature + 32;
 			});
-};
 
-
-$('#submit').click(function(){
-doStuff();
-});
+		$('#location').html(location);
+		$('#temperature').html(temperatureForReal);
+	});
 
 });
 </script>
