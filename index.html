@@ -1,66 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	 <meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<title>Weather App</title>
-	<!--<link rel="stylesheet" type="text/css" href="styles.css">-->
-	<!--<script type="text/javascript" src="app.js"></script>-->
+	<!--css and js files-->
+	<link rel="stylesheet" type="text/css" href="css\styles.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<style>
-body {
-	background-color: lightblue;
-	display: block;
-}
-
-#mainContainer {
-	display: block;
-	top: 100px;
-}
-
-</style>
+	<!--Bootstrap CDN-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
-<body>
+<body style="background-color:lightblue">
 
-	<div id=mainContainer class="weather-app text-center">
+<div id=container>
+
+	<div id=topContainer class="weather-app text-center well">
 		<div class="temperature"><span id="temperature">0 </span>&deg; Fahrenheit</div>
 		<div class="location"><span id="location">Location</span></div>
+		<BR>
+		<ul>Some zipcodes to try:
+				<li>12345, Schenectady</li>
+				<li>10001, Hoboken</li>
+				<li>10101, Manhatten</li>
+		</ul>
+
 			<BR>
 			<form>
-				<input id="zipCode">Zip Code</input> <BR>
-					<input type="button" id="submit" value="Submit"></input>
+				<p>Zip Code: <input id="zipCode" size="7" maxlength="5" type="text"></input><input id="submit" type="button" value="Submit"></input></p>
 			</form>
+			
 	</div>
 
-<script type=text/javascript>
-$(document).ready(function(){
-var zipCode;
-var appIdNum = "4409cc84190b23cb86522e4265e9c1bf"
-var url;
-var temperature;
-var location;
-var temperatureForReal;
+	<div id=bottomContainer class="container well">
+		<div class="row">
+					<img src="images/default.jpg" id="picture" class="img-responsive">
+						<!--<div id="picture" class="img-responsive"></div>-->
+		</div>
+</div>
 
-	$('#submit').click(function(){
-		zipCode = $('#zipCode').val();
-	 	url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipCode + "&APPID="+ appIdNum;
-
-			$.getJSON(url, function(weather){
-				location = weather.name;
-				temperature = weather.main.temp - 273;
-				temperatureForReal = (9/5) * temperature + 32;
-			});
-
-		$('#location').html(location);
-		$('#temperature').html(temperatureForReal);
-	});
-
-});
-</script>
+</div>
+<script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>
