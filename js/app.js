@@ -1,6 +1,6 @@
 $(document).ready(function(){
 var zipCode;
-var appIdNum = "4409cc84190b23cb86522e4265e9c1bf"
+var appIdNum = "API KEY"
 var url;
 //variables for outputing data
 var temperature;
